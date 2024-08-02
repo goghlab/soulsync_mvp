@@ -1,38 +1,140 @@
+/* General Styles */
 .App {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background-image: url('./assets/background.png'); /* 背景圖像 */
+  background-size: cover; /* 覆蓋整個背景區域 */
+  background-position: center; /* 背景圖像居中 */
+  background-repeat: no-repeat; /* 防止背景重複 */
+  background-color: #000; /* 黑色背景色，可根據需要移除 */
+  justify-content: center; /* 垂直和水平方向居中 */
+  align-items: center;
+}
+
+/* Logo Styles */
+.logo {
+  width: 220px; /* 調整大小 */
+  margin-bottom: 20px; /* 標誌下方間距 */
+}
+
+/* Login Form Styles */
+.login-form {
+  background: #333; /* 更暗的背景顏色 */
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* 更明顯的陰影 */
+  width: 100%;
+  max-width: 400px;
+  text-align: center; /* 讓表單內容居中對齊 */
+}
+
+.login-form h2,
+.login-form h4 {
+  color: #fff; /* 白色文字 */
+}
+
+.login-form h2 {
+  margin-bottom: 20px;
+  font-size: 24px; /* 調整字號 */
+}
+
+.login-form h4 {
+  margin-bottom: 20px; /* 间距调节 */
+  font-size: 18px; /* 字号调整 */
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #fff; /* 白色文字 */
+  font-weight: bold; /* 粗體標籤 */
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #d1cccc; /* 深灰色邊框 */
+  border-radius: 5px;
+  background: #222; /* 更暗的輸入背景 */
+  color: #fff; /* 白色文字 */
+}
+
+button {
+  background: #000; /* 黑色背景 */
+  color: #fff; /* 白色文字 */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  width: 100%;
+  transition: background 0.3s, color 0.3s;
+}
+
+button:hover {
+  background: #746868; /* 鼠標懸停時顏色 */
+  color: #fff; /* 白色文字 */
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .App-header {
+    width: 50%; /* 中等屏幕寬度 */
+  }
+}
+
+@media (max-width: 900px) {
+  .App-header {
+    width: 60%; /* 小屏幕寬度 */
+  }
+}
+
+@media (max-width: 600px) {
+  .App-header {
+    width: 100%; /* 全寬 */
+    padding: 20px;
+    text-align: center;
+    box-shadow: none; /* 小屏幕時移除陰影 */
+  }
+  .logo {
+    width: 180px; /* 更小的標誌 */
+    margin-bottom: 0px; /* 調整間距 */
+  }
+  .login-form {
+    padding: 20px;
+  }
+}
+
+/* Additional Styles */
+.error-message {
+  color: #f00; /* 錯誤信息紅色 */
+  margin-bottom: 15px;
+  font-size: 14px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+button:disabled {
+  background: #444; /* 禁用狀態顏色 */
+  cursor: not-allowed; /* 禁用狀態光標 */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+button:disabled:hover {
+  background: #444; /* 禁用狀態懸停顏色 */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+input:focus {
+  outline: 2px solid #fff; /* 聚焦輸入框時高亮 */
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+small {
+  color: #aaa; /* 幫助文字顏色 */
 }
