@@ -4,45 +4,117 @@
   height: 100vh;
   overflow: hidden;
   position: relative;
-  background-image: url('./assets/background.png'); /* 背景圖像 */
-  background-size: cover; /* 覆蓋整個背景區域 */
-  background-position: center; /* 背景圖像居中 */
-  background-repeat: no-repeat; /* 防止背景重複 */
-  background-color: #000; /* 黑色背景色，可根據需要移除 */
-  justify-content: center; /* 垂直和水平方向居中 */
+  background-image: url('./assets/background.png'); /* Background image */
+  background-size: cover; /* Cover entire background area */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent background from repeating */
+  background-color: #000; /* Black background color */
+  justify-content: center; /* Center content vertically and horizontally */
   align-items: center;
+}
+
+/* Header Styles */
+.App-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+  text-align: center; /* Center text inside header */
+}
+
+/* Define the fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Apply the fade-in animation */
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
 }
 
 /* Logo Styles */
 .logo {
-  width: 220px; /* 調整大小 */
-  margin-bottom: 20px; /* 標誌下方間距 */
+  width: 300px; /* Adjust size as needed */
+  margin-bottom: 20px;
+  opacity: 0; /* Start as invisible */
+  animation: fadeIn 1s ease-in-out forwards; /* Fade-in animation */
+}
+
+/* Landing Page Styles */
+.landing-page {
+  text-align: center;
+  color: #fff; /* White text color */
+}
+
+.landing-page h3 {
+  opacity: 0; /* Start as invisible */
+  animation: fadeIn 2s ease-in-out forwards; /* Fade-in animation */
+}
+
+/* Landing Page Button Styles */
+.get-started-button {
+  background: #5D00F0; /* Purple background */
+  color: #ffffff; /* White text color */
+  padding: 12px 25px; /* Adjust padding to make button larger */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  min-width: 250px; /* Minimum width */
+  max-width: 300px; /* Optional: limit the maximum width */
+  text-align: center; /* Center text inside button */
+  transition: background 0.3s, color 0.3s;
+}
+
+.get-started-button:hover {
+  background: #4b00d1; /* Darker purple on hover */
+  color: #ffffff; /* White text color */
+}
+
+.get-started-button::after {
+  content: "→"; /* Arrow character */
+  position: absolute;
+  right: 10px; /* Position from the right */
+  top: 50%;
+  transform: translateY(-50%); /* Center vertically */
+  font-size: 18px; /* Size of the arrow */
+  transition: transform 0.3s; /* Smooth transition for hover effect */
+}
+
+.get-started-button:hover::after {
+  transform: translateY(-50%) translateX(5px); /* Move arrow on hover */
 }
 
 /* Login Form Styles */
 .login-form {
-  background: #333; /* 更暗的背景顏色 */
+  background: #333; /* Darker background color */
   padding: 40px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* 更明顯的陰影 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* More pronounced shadow */
   width: 100%;
   max-width: 400px;
-  text-align: center; /* 讓表單內容居中對齊 */
+  text-align: center; /* Center form content */
 }
 
 .login-form h2,
 .login-form h4 {
-  color: #fff; /* 白色文字 */
+  color: #fff; /* White text color */
 }
 
 .login-form h2 {
   margin-bottom: 20px;
-  font-size: 24px; /* 調整字號 */
+  font-size: 24px; /* Adjust font size */
 }
 
 .login-form h4 {
-  margin-bottom: 20px; /* 间距调节 */
-  font-size: 18px; /* 字号调整 */
+  margin-bottom: 20px; /* Adjust spacing */
+  font-size: 18px; /* Adjust font size */
 }
 
 .form-group {
@@ -53,23 +125,24 @@
 .form-group label {
   display: block;
   margin-bottom: 5px;
-  color: #fff; /* 白色文字 */
-  font-weight: bold; /* 粗體標籤 */
+  color: #fff; /* White text color */
+  font-weight: bold; /* Bold labels */
 }
 
 .form-group input {
   width: 100%;
   padding: 10px;
   box-sizing: border-box;
-  border: 1px solid #d1cccc; /* 深灰色邊框 */
+  border: 1px solid #d1cccc; /* Dark gray border */
   border-radius: 5px;
-  background: #222; /* 更暗的輸入背景 */
-  color: #fff; /* 白色文字 */
+  background: #222; /* Darker input background */
+  color: #fff; /* White text color */
 }
 
+/* Button Styles */
 button {
-  background: #000; /* 黑色背景 */
-  color: #fff; /* 白色文字 */
+  background: #5D00F0; /* Purple background */
+  color: #ffffff; /* White text color */
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -81,60 +154,64 @@ button {
 }
 
 button:hover {
-  background: #746868; /* 鼠標懸停時顏色 */
-  color: #fff; /* 白色文字 */
+  background: #4b00d1; /* Darker purple on hover */
+  color: #ffffff; /* White text color */
 }
 
-/* Responsive Styles */
-@media (max-width: 1200px) {
-  .App-header {
-    width: 50%; /* 中等屏幕寬度 */
-  }
+button:disabled {
+  background: #444; /* Disabled state color */
+  cursor: not-allowed; /* Disabled state cursor */
 }
 
-@media (max-width: 900px) {
-  .App-header {
-    width: 60%; /* 小屏幕寬度 */
-  }
+button:disabled:hover {
+  background: #444; /* Disabled state hover color */
 }
 
-@media (max-width: 600px) {
-  .App-header {
-    width: 100%; /* 全寬 */
-    padding: 20px;
-    text-align: center;
-    box-shadow: none; /* 小屏幕時移除陰影 */
-  }
-  .logo {
-    width: 180px; /* 更小的標誌 */
-    margin-bottom: 0px; /* 調整間距 */
-  }
-  .login-form {
-    padding: 20px;
-  }
+/* Input Focus Styles */
+input:focus {
+  outline: 2px solid #fff; /* Highlight input field on focus */
 }
 
 /* Additional Styles */
 .error-message {
-  color: #f00; /* 錯誤信息紅色 */
+  color: #f00; /* Red error message */
   margin-bottom: 15px;
   font-size: 14px;
   text-align: center;
 }
 
-button:disabled {
-  background: #444; /* 禁用狀態顏色 */
-  cursor: not-allowed; /* 禁用狀態光標 */
-}
-
-button:disabled:hover {
-  background: #444; /* 禁用狀態懸停顏色 */
-}
-
-input:focus {
-  outline: 2px solid #fff; /* 聚焦輸入框時高亮 */
-}
-
 small {
-  color: #aaa; /* 幫助文字顏色 */
+  color: #aaa; /* Helper text color */
+}
+
+/* Login Link Styles */
+.login-link {
+  color: #fff; /* White text color */
+  margin-top: 20px; /* Space above the link */
+  text-align: center; /* Center text */
+}
+
+.login-link a {
+  color: #fff; /* White text color for the link */
+  text-decoration: underline; /* Underline the link */
+}
+
+.login-link a:hover {
+  color: #e6e6e6; /* Light gray color on hover */
+}
+
+/* Signup Link Styles */
+.signup-link {
+  color: #fff; /* White text color */
+  margin-top: 20px; /* Space above the link */
+  text-align: center; /* Center text */
+}
+
+.signup-link a {
+  color: #fff; /* White text color for the link */
+  text-decoration: underline; /* Underline the link */
+}
+
+.signup-link a:hover {
+  color: #e6e6e6; /* Light gray color on hover */
 }
