@@ -1,25 +1,24 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './App.css';
-import logo from './assets/soulsynclogo.png';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
-    // Simulate login process
     try {
-      // Replace with actual login logic
       await new Promise((resolve) => setTimeout(resolve, 2000));
       console.log('Email:', email);
       console.log('Password:', password);
-      // Redirect or handle successful login here
+      navigate('/dashboard'); // Redirect to dashboard after successful login
     } catch (err) {
       setError('Login failed. Please try again.');
     } finally {

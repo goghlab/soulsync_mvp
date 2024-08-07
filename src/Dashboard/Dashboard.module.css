@@ -1,0 +1,67 @@
+/* Container for the whole dashboard */
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full height */
+    background-color: #000; /* Black background */
+    color: #fff; /* White text color */
+}
+
+/* Main content area */
+.mainContent {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Adjust spacing */
+    padding: 20px;
+    box-sizing: border-box;
+    flex: 1; /* Take up remaining space */
+}
+
+/* Card styles */
+.card {
+    background: #333; /* Darker card background */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    margin: 15px; /* Increased margin for better spacing */
+    flex: 1 1 calc(25% - 30px); /* Flexible width for larger screens with increased margin */
+    text-align: center;
+    color: #fff; /* White text color */
+    box-sizing: border-box;
+    aspect-ratio: 1 / 1; /* Maintain a square aspect ratio */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition effects */
+}
+
+/* Card hover effects */
+.card:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7); /* Enhanced shadow on hover */
+}
+
+/* Card heading styles */
+.card h3 {
+    margin: 0;
+    font-size: 20px; /* Adjusted font size for better readability */
+}
+
+/* Card paragraph styles */
+.card p {
+    margin-top: 10px;
+    font-size: 14px; /* Adjusted font size for better readability */
+}
+
+/* Media Queries for Responsiveness */
+
+/* Tablets and smaller screens */
+@media (max-width: 1024px) {
+    .card {
+        flex: 1 1 calc(50% - 30px); /* Adjust width for tablets with increased margin */
+    }
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+    .card {
+        flex: 1 1 calc(100% - 30px); /* Full width for mobile devices with increased margin */
+    }
+}

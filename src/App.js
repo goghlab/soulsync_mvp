@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Login from './Login';
 import Signup from './Signup';
+import Dashboard from './Dashboard';
+
 import './App.css';
 import logo from './assets/soulsynclogo.png';
 
@@ -10,12 +12,13 @@ function App() {
     <div className="App">
       <Router>
         <div className="background-image"></div>
-        <header className="App-header">
+        <header className="App-header pt-52"> {/* Added padding-top of 200 pixels */}
           <img src={logo} alt="SoulSync Logo" className="logo" />
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </header>
       </Router>

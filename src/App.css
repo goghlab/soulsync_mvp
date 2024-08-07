@@ -39,7 +39,7 @@
 
 /* Logo Styles */
 .logo {
-  width: 300px; /* Adjust size as needed */
+  width: 180px; /* Adjust size as needed */
   margin-bottom: 20px;
   opacity: 0; /* Start as invisible */
   animation: fadeIn 1s ease-in-out forwards; /* Fade-in animation */
