@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
+import Upload from './Upload';
 
 import './App.css';
 import logo from './assets/soulsynclogo.png';
@@ -19,6 +20,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/upload-assets" element={<Upload />} />
           </Routes>
         </header>
       </Router>
@@ -29,7 +31,7 @@ function App() {
 function LandingPage() {
   return (
     <div className="landing-page fade-in">
-      <h4>Welcome to SoulSync🕯️</h4>
+      <h2>Welcome to SoulSync🕯️</h2>
       <p>
         SoulSync: Keeping loved ones' memories alive through virtual human connection.</p>
       <Link to="/login">

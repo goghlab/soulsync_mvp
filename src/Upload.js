@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaHome, FaUser, FaUserCircle, FaDollarSign, FaUpload, FaFileAlt, FaCog, FaLifeRing, FaSignOutAlt } from 'react-icons/fa';
 import banner from './assets/banner01.png'; // Import the banner image
 
-function Dashboard() {
+function Upload() {
   return (
     <div className="flex flex-col h-screen bg-custom-dark-gray text-white">
       <main className="flex-1 p-6 overflow-y-auto">
@@ -11,27 +11,33 @@ function Dashboard() {
         <div className="relative bg-custom-gray p-4 mb-6 rounded-lg shadow-lg">
           <img src={banner} alt="Banner" className="w-full h-40 object-cover rounded-lg mb-4" />
           <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white bg-black bg-opacity-50 rounded-lg p-4">
-            <h2 className="text-2xl font-bold">Create Your SoulSync Avatar</h2>
-            <p className="mt-2">Choose an option to start your journey.</p>
+            <h2 className="text-2xl font-bold">Upload Info to Create SoulSync Avatar</h2>
+            <p className="mt-2"> love transcends timecreating a bond that endures forever</p>
           </div>
         </div>
 
-        {/* Options Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Link to="/upload-assets" className="bg-custom-gray rounded-lg shadow-lg p-6 flex flex-col items-center text-center hover:bg-custom-hover-gray transition">
-            <FaUpload size={48} className="mb-4 text-custom-light-gray" />
-            <h3 className="text-xl font-semibold mb-2">Upload Assets</h3>
-            <p className="mb-4">Start by uploading photos, videos, voice recordings, and personal stories to create your avatar.</p>
-          </Link>
-          <Link to="/explore-avatars" className="bg-custom-gray rounded-lg shadow-lg p-6 flex flex-col items-center text-center hover:bg-custom-hover-gray transition">
-            <FaUserCircle size={48} className="mb-4 text-custom-light-gray" />
-            <h3 className="text-xl font-semibold mb-2">Explore Avatars</h3>
-            <p className="mb-4">View and interact with existing avatars, or explore the gallery to find inspiration.</p>
-          </Link>
+        {/* Cards Section */}
+        <div className="bg-custom-gray rounded-lg shadow-lg p-6 mb-4">
+          <h3 className="text-lg font-semibold mb-2">Profile Photo</h3>
+          <p className="mb-4">Upload a photo of the person to help with avatar generation.</p>
+          <input type="file" accept="image/*" className="border border-custom-gray rounded p-2 bg-gray-900 text-white" />
+        </div>
+        <div className="bg-custom-gray rounded-lg shadow-lg p-6 mb-4">
+          <h3 className="text-lg font-semibold mb-2">Voice Recording</h3>
+          <p className="mb-4">Upload a voice recording to capture the person's vocal characteristics.</p>
+          <input type="file" accept="audio/*" className="border border-custom-gray rounded p-2 bg-gray-900 text-white" />
+        </div>
+        <div className="bg-custom-gray rounded-lg shadow-lg p-6 mb-4">
+          <h3 className="text-lg font-semibold mb-2">Footage</h3>
+          <p className="mb-4">Upload video footage for detailed visual data.</p>
+          <input type="file" accept="video/*" className="border border-custom-gray rounded p-2 bg-gray-900 text-white" />
+        </div>
+        <div className="bg-custom-gray rounded-lg shadow-lg p-6 mb-4">
+          <h3 className="text-lg font-semibold mb-2">Personal Stories</h3>
+          <p className="mb-4">Upload text data or personal stories to add personality details.</p>
+          <input type="file" accept=".txt,.doc,.docx" className="border border-custom-gray rounded p-2 bg-gray-900 text-white" />
         </div>
       </main>
-
-      {/* Bottom Navigation Bar */}
       <nav className="flex justify-around items-center bg-custom-gray p-4 fixed bottom-0 w-full">
         <Link to="/dashboard" className="text-custom-light-gray hover:text-custom-hover-gray">
           <FaHome size={24} />
@@ -74,4 +80,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Upload;

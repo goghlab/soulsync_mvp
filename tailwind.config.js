@@ -7,10 +7,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'custom-dark-gray': '#000000', // #1a1a1a turned 1x darker
-        'custom-gray': '#1a1a1a', // #2e2e2e turned 1x darker
-        'custom-light-gray': '#808080', // #a0a0a0 turned 1x darker
-        'custom-hover-gray': '#666666', // #808080 turned 1x darker
+        'custom-dark-gray': '#0d0d0d', // Darker than #1a1a1a
+        'custom-gray': '#1c1c1c', // Darker than #2e2e2e
+        'custom-light-gray': '#8c8c8c', // Darker than #a0a0a0
+        'custom-hover-gray': '#6e6e6e', // Darker than #808080
       },
     },
   },
