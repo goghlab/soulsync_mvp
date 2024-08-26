@@ -1,9 +1,30 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { FaHome, FaUser, FaUserCircle, FaDollarSign, FaUpload, FaFileAlt, FaCog, FaLifeRing, FaSignOutAlt } from 'react-icons/fa';
 import banner from './assets/banner01.png'; // Import the banner image
+import { auth } from './firebase';
 
 function Dashboard() {
+  const { uid } = useParams(); // Get UID from URL
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    console.log("UID from URL:", uid); // Debug UID from URL
+
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        setUser(authUser); // Set user state to the authenticated user
+        console.log("Authenticated user UID:", authUser.uid); // Debug authenticated user UID
+      }
+    });
+
+    return () => unsubscribe();
+  }, [uid]);
+
+  if (!user) {
+    return <p>Loading...</p>; // Show a loading state until user data is fetched
+  }
+
   return (
     <div className="flex flex-col h-screen bg-custom-dark-gray text-white">
       <main className="flex-1 p-6 overflow-y-auto">
@@ -11,9 +32,15 @@ function Dashboard() {
         <div className="relative bg-custom-gray p-4 mb-6 rounded-lg shadow-lg">
           <img src={banner} alt="Banner" className="w-full h-40 object-cover rounded-lg mb-4" />
           <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white bg-black bg-opacity-50 rounded-lg p-4">
-            <h2 className="text-2xl font-bold">Create Your SoulSync Avatar</h2>
-            <p className="mt-2">Choose an option to start your journey.</p>
+            <h2 className="text-2xl font-bold">SoulSync STREAM</h2>
+            <p className="mt-2">Start an interactive streaming session with SoulSync STREAM</p>
           </div>
+        </div>
+
+        {/* User Greeting */}
+        <div className="mb-6">
+          <h3 className="text-xl font-semibold">Welcome, {user.email}!</h3>
+          <p className="text-lg">Your UID is: {uid || user.uid}</p>
         </div>
 
         {/* Options Section */}
@@ -33,7 +60,7 @@ function Dashboard() {
 
       {/* Bottom Navigation Bar */}
       <nav className="flex justify-around items-center bg-custom-gray p-4 fixed bottom-0 w-full">
-        <Link to="/dashboard" className="text-custom-light-gray hover:text-custom-hover-gray">
+        <Link to={`/dashboard/${uid}`} className="text-custom-light-gray hover:text-custom-hover-gray">
           <FaHome size={24} />
           <span className="sr-only">Home</span>
         </Link>

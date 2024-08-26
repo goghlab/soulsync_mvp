@@ -12,32 +12,36 @@ function Upload() {
           <img src={banner} alt="Banner" className="w-full h-40 object-cover rounded-lg mb-4" />
           <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white bg-black bg-opacity-50 rounded-lg p-4">
             <h2 className="text-2xl font-bold">Upload Info to Create SoulSync Avatar</h2>
-            <p className="mt-2"> love transcends timecreating a bond that endures forever</p>
+            <p className="mt-2">Love transcends time, creating a bond that endures forever</p>
           </div>
         </div>
 
         {/* Cards Section */}
-        <div className="bg-custom-gray rounded-lg shadow-lg p-6 mb-4">
-          <h3 className="text-lg font-semibold mb-2">Profile Photo</h3>
-          <p className="mb-4">Upload a photo of the person to help with avatar generation.</p>
-          <input type="file" accept="image/*" className="border border-custom-gray rounded p-2 bg-gray-900 text-white" />
-        </div>
-        <div className="bg-custom-gray rounded-lg shadow-lg p-6 mb-4">
-          <h3 className="text-lg font-semibold mb-2">Voice Recording</h3>
-          <p className="mb-4">Upload a voice recording to capture the person's vocal characteristics.</p>
-          <input type="file" accept="audio/*" className="border border-custom-gray rounded p-2 bg-gray-900 text-white" />
-        </div>
-        <div className="bg-custom-gray rounded-lg shadow-lg p-6 mb-4">
-          <h3 className="text-lg font-semibold mb-2">Footage</h3>
-          <p className="mb-4">Upload video footage for detailed visual data.</p>
-          <input type="file" accept="video/*" className="border border-custom-gray rounded p-2 bg-gray-900 text-white" />
-        </div>
-        <div className="bg-custom-gray rounded-lg shadow-lg p-6 mb-4">
-          <h3 className="text-lg font-semibold mb-2">Personal Stories</h3>
-          <p className="mb-4">Upload text data or personal stories to add personality details.</p>
-          <input type="file" accept=".txt,.doc,.docx" className="border border-custom-gray rounded p-2 bg-gray-900 text-white" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="bg-custom-gray rounded-lg shadow-lg p-6 mb-4">
+            <h3 className="text-lg font-semibold mb-2">Profile Photo</h3>
+            <p className="mb-4">Upload a photo of the person to help with avatar generation.</p>
+            <input type="file" accept="image/*" className="border border-custom-gray rounded p-2 bg-gray-900 text-white w-full" />
+          </div>
+          <div className="bg-custom-gray rounded-lg shadow-lg p-6 mb-4">
+            <h3 className="text-lg font-semibold mb-2">Voice Recording</h3>
+            <p className="mb-4">Upload a voice recording to capture the person's vocal characteristics.</p>
+            <input type="file" accept="audio/*" className="border border-custom-gray rounded p-2 bg-gray-900 text-white w-full" />
+          </div>
+          <div className="bg-custom-gray rounded-lg shadow-lg p-6 mb-4">
+            <h3 className="text-lg font-semibold mb-2">Footage</h3>
+            <p className="mb-4">Upload video footage for detailed visual data.</p>
+            <input type="file" accept="video/*" className="border border-custom-gray rounded p-2 bg-gray-900 text-white w-full" />
+          </div>
+          <div className="bg-custom-gray rounded-lg shadow-lg p-6 mb-4">
+            <h3 className="text-lg font-semibold mb-2">Personal Stories</h3>
+            <p className="mb-4">Upload text data or personal stories to add personality details.</p>
+            <input type="file" accept=".txt,.doc,.docx" className="border border-custom-gray rounded p-2 bg-gray-900 text-white w-full" />
+          </div>
         </div>
       </main>
+
+      {/* Bottom Navigation Bar */}
       <nav className="flex justify-around items-center bg-custom-gray p-4 fixed bottom-0 w-full">
         <Link to="/dashboard" className="text-custom-light-gray hover:text-custom-hover-gray">
           <FaHome size={24} />

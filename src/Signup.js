@@ -1,26 +1,26 @@
 import React, { useState } from 'react';
-import './App.css';
-import logo from './assets/soulsynclogo.png';
+import { useNavigate } from 'react-router-dom';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from './firebase'; // Import auth from firebase.js
 
 function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
-    // Simulate signup process
     try {
-      // Replace with actual signup logic
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      console.log('Email:', email);
-      console.log('Password:', password);
-      // Redirect or handle successful signup here
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      console.log('User signed up:', userCredential.user);
+      navigate(`/dashboard/${userCredential.user.uid}`); // Redirect with UID
     } catch (err) {
+      console.error('Signup failed:', err.message);
       setError('Signup failed. Please try again.');
     } finally {
       setLoading(false);
@@ -28,13 +28,12 @@ function Signup() {
   };
 
   return (
-    <form className="login-form" onSubmit={handleSubmit} aria-live="polite">
-      
+    <form className="signup-form" onSubmit={handleSubmit} aria-live="polite">
       <h2>🔮 Early Access to SoulSync</h2>
       <h4>Create an Account</h4>
-      
+
       {error && <div className="error-message">{error}</div>}
-      
+
       <div className="form-group">
         <label htmlFor="email">Email Address:</label>
         <input
@@ -44,10 +43,11 @@ function Signup() {
           onChange={(e) => setEmail(e.target.value)}
           required
           aria-describedby="email-helper-text"
+          placeholder="Enter your email"
         />
         <small id="email-helper-text">Enter the email address you want to register with.</small>
       </div>
-      
+
       <div className="form-group">
         <label htmlFor="password">Password:</label>
         <input
@@ -57,11 +57,12 @@ function Signup() {
           onChange={(e) => setPassword(e.target.value)}
           required
           aria-describedby="password-helper-text"
+          placeholder="Create a password"
         />
-        <small id="password-helper-text">Create a strong password.</small>
+        <small id="password-helper-text">Create a strong password with at least 6 characters.</small>
       </div>
 
-      <button type="submit" disabled={loading}>
+      <button type="submit" disabled={loading} className="submit-button">
         {loading ? 'Signing up...' : 'Sign Up'}
       </button>
 
