@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './firebase'; // Import auth from firebase.js
+import './App.css'; // Ensure both components import the same CSS file
 
 function Signup() {
   const [email, setEmail] = useState('');
@@ -28,7 +29,7 @@ function Signup() {
   };
 
   return (
-    <form className="signup-form" onSubmit={handleSubmit} aria-live="polite">
+    <form className="login-form" onSubmit={handleSubmit} aria-live="polite">
       <h2>🔮 Early Access to SoulSync</h2>
       <h4>Create an Account</h4>
 
@@ -62,7 +63,7 @@ function Signup() {
         <small id="password-helper-text">Create a strong password with at least 6 characters.</small>
       </div>
 
-      <button type="submit" disabled={loading} className="submit-button">
+      <button type="submit" disabled={loading}>
         {loading ? 'Signing up...' : 'Sign Up'}
       </button>
 

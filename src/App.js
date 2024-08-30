@@ -28,7 +28,6 @@ function App() {
 function LandingPage() {
   return (
     <div className="landing-page fade-in">
-      <HeyGenAvatarComponent /> {/* Insert the avatar component here */}
       <h2>Welcome to SoulSync🕯️</h2>
       <p>
         SoulSync: Keeping loved ones' memories alive through virtual human connection.
