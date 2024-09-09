@@ -215,3 +215,11 @@ small {
 .signup-link a:hover {
   color: #e6e6e6; /* Light gray color on hover */
 }
+
+.status-bar p {
+  color: white;
+}
+
+.loading-spinner {
+  color: white;
+}

@@ -1,32 +1,35 @@
-// WebRTCComponent.js
-
-import { initializeWebRTC } from './webrtcSetup'; // Adjust the path based on where the file is located
-
+import { initializeWebRTC } from '../webrtcSetup'; // Adjust the path based on where the file is located
 import React, { useEffect } from 'react';
 
 function WebRTCComponent() {
-
   useEffect(() => {
     async function setupWebRTC() {
       try {
-        // Fetch offer data from your backend server via ngrok
-        const response = await fetch('https://600a-193-203-13-67.ngrok-free.app/get-sdp');
+        // Fetch offer data from your backend server
+        const response = await fetch(' https://cf40-45-80-184-175.ngrok-free.app/api/heygen/new-session');
         const offerData = await response.json();
 
-        // Initialize WebRTC and get the SDP answer
-        const answer = await initializeWebRTC(offerData);
+        console.log('Session creation response:', offerData); // Debugging line
 
-        // Send the SDP answer back to your backend server via ngrok
-        await fetch('https://600a-193-203-13-67.ngrok-free.app/send-sdp-answer', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ sdp: answer }),
-        });
+        if (offerData?.sdp) {
+          console.log('SDP offer received:', offerData.sdp);
 
-        console.log('WebRTC connection established successfully');
+          // Initialize WebRTC and create an SDP answer using the offer
+          const answer = await initializeWebRTC(offerData.sdp);
 
+          // Send the SDP answer back to your backend server
+          await fetch(' https://cf40-45-80-184-175.ngrok-free.app/send-sdp-answer', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ sdp: answer }),
+          });
+
+          console.log('SDP answer sent successfully, WebRTC connection established');
+        } else {
+          console.error('Invalid offer data received:', offerData);
+        }
       } catch (error) {
         console.error('Failed to establish WebRTC connection:', error);
       }
