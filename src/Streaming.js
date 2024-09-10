@@ -1,51 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import { createNewSession, getSDPOffer, sendSDPAnswer, stopSession } from './api'; // Use your existing API calls
-import WebRTCComponent from './components/WebRTCComponent'; // Assuming you have a WebRTCComponent for the UI
+import { createNewSession, sendSDPAnswer, stopSession } from './api'; // Adjust for your actual API calls
+import WebRTCComponent from './components/WebRTCComponent'; // Assuming you have a WebRTCComponent for UI
+import { initializeWebRTC } from './webrtcSetup'; // Import the WebRTC setup function
 
 function Streaming() {
   const [sessionId, setSessionId] = useState(null);
   const [loading, setLoading] = useState(false);
   const [statusMessage, setStatusMessage] = useState('No session yet.');
   const [webRTCData, setWebRTCData] = useState(null); // State for storing WebRTC data
-  const [sdp, setSdp] = useState('');
-
-  // Function to handle WebRTC connection using SDP
-  const handleWebRTC = (sdpOffer) => {
-    const peerConnection = new RTCPeerConnection();
-
-    // Set the SDP offer to the remote description
-    peerConnection.setRemoteDescription(new RTCSessionDescription(sdpOffer))
-      .then(() => {
-        console.log('SDP Offer set successfully');
-        // You can now continue with WebRTC setup, ICE candidates, etc.
-      })
-      .catch(err => {
-        console.error('Failed to set SDP offer:', err);
-      });
-
-    // Handle ICE candidates (depending on your backend WebRTC setup)
-    peerConnection.onicecandidate = (event) => {
-      if (event.candidate) {
-        console.log('New ICE Candidate:', event.candidate);
-      }
-    };
-
-    // Additional WebRTC logic (e.g., adding tracks, handling streams, etc.)
-  };
 
   const handleCreateNewSession = async () => {
     setLoading(true);
     setStatusMessage('Creating new session...');
     try {
-      const data = await createNewSession('your-avatar-id', 'your-voice-id'); // Pass avatar and voice dynamically
+      const data = await createNewSession('your-avatar-id', 'your-voice-id'); // Adjust with dynamic avatar and voice IDs
       console.log('Session creation response:', data);
 
       setSessionId(data.sessionId);
       setStatusMessage(`New session created: ${data.sessionId}`);
-      
-      // Set the SDP offer to feed into WebRTC
-      setSdp(data.sdp);
-      handleWebRTC(data.sdp); // Start WebRTC with the SDP offer
+
+      // Pass the SDP offer and ICE servers to the WebRTC setup function
+      const sdpAnswer = await initializeWebRTC({
+        sdp: data.sdp,
+        iceServers: data.iceServers
+      });
+
+      // Send the generated SDP answer back to the server
+      await sendSDPAnswer(data.sessionId, sdpAnswer);
+
+      // Assuming you want to store some WebRTC data or streams
+      setWebRTCData(sdpAnswer);
+
     } catch (error) {
       console.error('Error creating session:', error);
       setStatusMessage('Failed to create session. Please try again.');
@@ -74,12 +59,6 @@ function Streaming() {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    if (sdp) {
-      handleWebRTC(sdp); // Initiate WebRTC when SDP is set
-    }
-  }, [sdp]);
 
   return (
     <div style={{ padding: '20px', maxWidth: '500px', margin: 'auto', color: 'white' }}>
