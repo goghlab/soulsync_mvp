@@ -4,9 +4,11 @@ import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
 import logo from './assets/soulsynclogo.png';
-import img01 from './assets/img01.png'; // Import the img01.png image
-import HeyGenAvatarComponent from './avatar'; // Adjust the path if needed
-import Streaming from './Streaming'; // Use 'Streaming' with a capital 'S'
+import img01 from './assets/img01.png';
+import HeyGenAvatarComponent from './avatar';
+import Streaming from './Streaming';
+import StreamingHeygen from './StreamingHeygen';
+import Upload from './Upload'; // Import the Upload component
 
 function App() {
   return (
@@ -20,7 +22,9 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/dashboard/:uid" element={<Dashboard />} />
-            <Route path="/streaming" element={<Streaming />} /> {/* Add the Streaming route */}
+            <Route path="/streaming" element={<Streaming />} />
+            <Route path="/streamingheygen" element={<StreamingHeygen />} />
+            <Route path="/uploads" element={<Upload />} /> {/* Add route for Upload component */}
           </Routes>
         </header>
       </Router>
@@ -31,13 +35,16 @@ function App() {
 function LandingPage() {
   return (
     <div className="landing-page fade-in" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-      <img src={img01} alt="SoulSync" className="landing-image" style={{ width: '50%', height: 'auto', marginBottom: '20px' }} /> {/* Add the image above the heading */}
+      <img src={img01} alt="SoulSync" className="landing-image" style={{ width: '50%', height: 'auto', marginBottom: '20px' }} />
       <h2>Welcome to SoulSync🕯️</h2>
       <p>
         SoulSync: Keeping loved ones' memories alive through virtual human connection.
       </p>
       <Link to="/login">
         <button className="get-started-button">Get Started</button>
+      </Link>
+      <Link to="/streamingheygen">
+        <button className="get-started-button">Stream HeyGen Avatar</button>
       </Link>
     </div>
   );

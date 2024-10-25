@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = ' https://cf40-45-80-184-175.ngrok-free.app'; // Replace with your actual base URL
+const BASE_URL = 'https://7c89-193-203-12-87.ngrok-free.app'; // Replace with your actual base URL
 
 // Function to create a new session with HeyGen
 export const createNewSession = async (avatarId, voiceId, quality = 'medium') => {
@@ -48,6 +48,28 @@ export const sendSDPAnswer = async (answer, sessionId) => {
     throw error;
   }
 };
+
+// Function to start a session with HeyGen
+export const startSession = async (sessionId, sdp) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/api/heygen/start-session`, {
+      session_id: sessionId,
+      sdp: {
+        type: sdp.type,   // Offer type
+        sdp: sdp.sdp,     // SDP data (e.g., ICE candidates, media description)
+      }
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Failed to start session:', error);
+    throw error;
+  }
+};
+
 
 // Function to stop a session
 export const stopSession = async (sessionId) => {

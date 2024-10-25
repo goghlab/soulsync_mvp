@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { FaHome, FaUser, FaUserCircle, FaDollarSign, FaUpload, FaFileAlt, FaCog, FaLifeRing, FaSignOutAlt } from 'react-icons/fa';
+import { FaHome, FaUser, FaUserCircle, FaDollarSign, FaUpload, FaFileAlt, FaCog, FaLifeRing, FaSignOutAlt, FaVideo } from 'react-icons/fa';
 import banner from './assets/banner01.png'; // Import the banner image
 import { auth } from './firebase';
 
@@ -43,17 +43,25 @@ function Dashboard() {
           <p className="text-lg">Your UID is: {uid || user.uid}</p>
         </div>
 
-        {/* Options Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Link to="/upload-assets" className="bg-custom-gray rounded-lg shadow-lg p-6 flex flex-col items-center text-center hover:bg-custom-hover-gray transition">
-            <FaUpload size={48} className="mb-4 text-custom-light-gray" />
-            <h3 className="text-xl font-semibold mb-2">Upload Assets</h3>
-            <p className="mb-4">Start by uploading photos, videos, voice recordings, and personal stories to create your avatar.</p>
-          </Link>
+{/* Options Section */}
+<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+  <Link to="/uploads" className="bg-custom-gray rounded-lg shadow-lg p-6 flex flex-col items-center text-center hover:bg-custom-hover-gray transition">
+    <FaUpload size={48} className="mb-4 text-custom-light-gray" />
+    <h3 className="text-xl font-semibold mb-2">Upload Assets</h3>
+    <p className="mb-4">Start by uploading photos, videos, voice recordings, and personal stories to create your avatar.</p>
+  </Link>
+          
           <Link to="/explore-avatars" className="bg-custom-gray rounded-lg shadow-lg p-6 flex flex-col items-center text-center hover:bg-custom-hover-gray transition">
             <FaUserCircle size={48} className="mb-4 text-custom-light-gray" />
-            <h3 className="text-xl font-semibold mb-2">Explore Avatars</h3>
+            <h3 className="text-xl font-semibold mb-2">Explore Service</h3>
             <p className="mb-4">View and interact with existing avatars, or explore the gallery to find inspiration.</p>
+          </Link>
+
+          {/* Updated SoulSync Streaming Option */}
+          <Link to="/streamingheygen" className="bg-custom-gray rounded-lg shadow-lg p-6 flex flex-col items-center text-center hover:bg-custom-hover-gray transition">
+            <FaVideo size={48} className="mb-4 text-custom-light-gray" />
+            <h3 className="text-xl font-semibold mb-2">SoulSync Streaming</h3>
+            <p className="mb-4">Start a live interactive session with your customized SoulSync avatar.</p>
           </Link>
         </div>
       </main>

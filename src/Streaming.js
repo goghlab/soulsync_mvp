@@ -19,6 +19,7 @@ function Streaming() {
       setSessionId(data.sessionId);
       setStatusMessage(`New session created: ${data.sessionId}`);
 
+
       // Pass the SDP offer and ICE servers to the WebRTC setup function
       const sdpAnswer = await initializeWebRTC({
         sdp: data.sdp,
@@ -62,7 +63,7 @@ function Streaming() {
 
   return (
     <div style={{ padding: '20px', maxWidth: '500px', margin: 'auto', color: 'white' }}>
-      <h1 style={{ color: 'white' }}>WebRTC Streaming</h1>
+      <h1 style={{ color: 'white' }}>WebRTC STREAMING</h1>
 
       <div className="status-bar">
         {loading ? (
