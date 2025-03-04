@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://7c89-193-203-12-87.ngrok-free.app'; // Replace with your actual base URL
+const BASE_URL = 'https://9988-185-213-82-223.ngrok-free.app'; // Replace with your actual base URL
 
 // Function to create a new session with HeyGen
 export const createNewSession = async (avatarId, voiceId, quality = 'medium') => {

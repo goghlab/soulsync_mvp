@@ -8,7 +8,7 @@ function WebRTCComponent() {
     async function setupWebRTC() {
       try {
         // Fetch offer data from your backend server
-        const response = await fetch('https://7c89-193-203-12-87.ngrok-free.app/api/heygen/new-session');
+        const response = await fetch('https://9988-185-213-82-223.ngrok-free.app/api/heygen/new-session');
 
         // Check for HTTP errors
         if (!response.ok) {
@@ -34,7 +34,7 @@ function WebRTCComponent() {
           }
 
           // Send the SDP answer back to your backend server
-          const answerResponse = await fetch('https://7c89-193-203-12-87.ngrok-free.app/send-sdp-answer', {
+          const answerResponse = await fetch('https://9988-185-213-82-223.ngrok-free.app/send-sdp-answer', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
