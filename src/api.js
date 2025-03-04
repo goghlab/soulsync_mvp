@@ -1,86 +1,50 @@
-import axios from 'axios';
+const BASE_URL = 'https://9988-185-213-82-223.ngrok-free.app/api/heygen';
 
-const BASE_URL = 'https://9988-185-213-82-223.ngrok-free.app'; // Replace with your actual base URL
-
-// Function to create a new session with HeyGen
-export const createNewSession = async (avatarId, voiceId, quality = 'medium') => {
+export async function createNewSession(avatarId, voiceId) {
   try {
-    const response = await axios.post(`${BASE_URL}/api/heygen/new-session`, {
-      avatarId,  // Pass avatarId dynamically
-      voiceId,   // Pass voiceId dynamically
-      quality    // Set default to 'medium' if not provided
-    }, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    const response = await fetch(`${BASE_URL}/new-session`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ avatarId, voiceId }), // Updated to match backend
     });
-    return response.data; // Return the session data (including sessionId)
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`Server responded with status ${response.status}: ${errorText}`);
+      throw new Error(`Failed to create session: ${response.status} - ${errorText}`);
+    }
+    return response.json();
   } catch (error) {
-    console.error('Failed to create session:', error);
+    console.error('Error in createNewSession:', error);
     throw error;
   }
-};
+}
 
-// Function to get SDP offer
-export const getSDPOffer = async (sessionId) => {
-  try {
-    const response = await axios.get(`${BASE_URL}/get-sdp?sessionId=${sessionId}`);
-    return response.data;
-  } catch (error) {
-    console.error('Failed to get SDP offer:', error);
-    throw error;
-  }
-};
+export async function sendSDPAnswer(sessionId, sdp) {
+  const response = await fetch(`${BASE_URL}/send-sdp-answer`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ session_id: sessionId, sdp }),
+  });
+  if (!response.ok) throw new Error('Failed to send SDP answer');
+  return response.json();
+}
 
-// Function to send SDP answer
-export const sendSDPAnswer = async (answer, sessionId) => {
-  try {
-    await axios.post(`${BASE_URL}/send-sdp-answer`, {
-      sdp: answer,
-      sessionId,
-    }, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-  } catch (error) {
-    console.error('Failed to send SDP answer:', error);
-    throw error;
-  }
-};
+export async function startSession(sessionId, sdp) {
+  const response = await fetch(`${BASE_URL}/start-session`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ session_id: sessionId, sdp }),
+  });
+  if (!response.ok) throw new Error('Failed to start session');
+  return response.json();
+}
 
-// Function to start a session with HeyGen
-export const startSession = async (sessionId, sdp) => {
-  try {
-    const response = await axios.post(`${BASE_URL}/api/heygen/start-session`, {
-      session_id: sessionId,
-      sdp: {
-        type: sdp.type,   // Offer type
-        sdp: sdp.sdp,     // SDP data (e.g., ICE candidates, media description)
-      }
-    }, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.error('Failed to start session:', error);
-    throw error;
-  }
-};
-
-
-// Function to stop a session
-export const stopSession = async (sessionId) => {
-  try {
-    await axios.post(`${BASE_URL}/stop-session`, { sessionId }, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-  } catch (error) {
-    console.error('Failed to stop session:', error);
-    throw error;
-  }
-};
+export async function stopSession(sessionId) {
+  const response = await fetch(`${BASE_URL}/stop-session`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ session_id: sessionId }),
+  });
+  if (!response.ok) throw new Error('Failed to stop session');
+  return response.json();
+}

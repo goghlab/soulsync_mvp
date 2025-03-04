@@ -1,30 +1,32 @@
-// src/webrtcSetup.js
-
 export async function initializeWebRTC(offerData) {
-  try {
-    const { sdp, iceServers } = offerData;
+  const { sdp, iceServers, sessionId } = offerData;
+  const peerConnection = new RTCPeerConnection({ iceServers });
 
-    const peerConnection = new RTCPeerConnection({
-      iceServers: iceServers
-    });
-
-    console.log('Peer connection state before setRemoteDescription:', peerConnection.connectionState);
-
-    if (peerConnection.connectionState === 'new') {
-      await peerConnection.setRemoteDescription(new RTCSessionDescription(sdp));
-    } else {
-      console.warn('Peer connection is in an invalid state for setting remote description:', peerConnection.connectionState);
-      return;
+  // Handle ICE candidates
+  peerConnection.onicecandidate = (event) => {
+    if (event.candidate) {
+      console.log('Sending ICE candidate:', event.candidate);
+      fetch('https://9988-185-213-82-223.ngrok-free.app/api/heygen/send-ice-candidate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          session_id: sessionId,
+          candidate: event.candidate,
+        }),
+      }).catch((error) => console.error('Error sending ICE candidate:', error));
     }
+  };
 
-    const answer = await peerConnection.createAnswer();
-    await peerConnection.setLocalDescription(answer);
-    console.log("Generated SDP Answer:", answer);
-    return answer;
+  // Monitor ICE connection state
+  peerConnection.oniceconnectionstatechange = () => {
+    console.log('ICE connection state:', peerConnection.iceConnectionState);
+  };
 
-  } catch (error) {
-    console.error('Error initializing WebRTC:', error);
-    throw error;
-  }
+  // Set remote description and generate answer
+  await peerConnection.setRemoteDescription(new RTCSessionDescription(sdp));
+  const answer = await peerConnection.createAnswer();
+  await peerConnection.setLocalDescription(answer);
+  console.log('Generated SDP Answer:', answer);
+
+  return { answer, peerConnection };
 }
-
